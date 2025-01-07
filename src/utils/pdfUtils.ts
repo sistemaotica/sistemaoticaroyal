@@ -223,12 +223,12 @@ export function generateExactLayoutPDF(order: Order) {
 
   function drawCompanyHeader(startY: number) {
     doc.setFont("helvetica", "bold");
-    doc.text("ÓTICA LAÍS | CNPJ: 53.806.941/0001-83", leftX, startY);
+    doc.text("ÓTICA ROYAL", leftX, startY);
     startY += 4;
     doc.setFont("helvetica", "normal");
-    doc.text("Endereço: Av. Duarte Coelho, 13, Centro, Igarassu - CEP: 53605-030", leftX, startY);
+    doc.text("@use.royall", leftX, startY);
     startY += 4;
-    doc.text("Tel.: (81)9.0000-0000  e-mail: oticalaisigarassu@gmail.com", leftX, startY);
+    doc.text("Tel.: (81) 9.9854-5035 | sac.oticaroyal@gmail.com", leftX, startY);
     return startY + 3;
   }
 
