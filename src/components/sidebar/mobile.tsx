@@ -10,10 +10,8 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import {
     FileText,
-    LogOut,
     Menu,
     PlusSquare,
-    Printer,
     UserCheck,
     Users,
 } from "lucide-react";
@@ -23,7 +21,7 @@ export function Mobile() {
     const [role, setRole] = useState<string | null>(null);
 
     useEffect(() => {
-        const userRole = localStorage.getItem("userRole"); // Obtém o papel do usuário do localStorage
+        const userRole = localStorage.getItem("userRole");
         setRole(userRole);
     }, []);
 

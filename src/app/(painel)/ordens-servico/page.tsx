@@ -63,6 +63,14 @@ interface Order {
   lensDetails: LensDetails;
 }
 
+function normalizeCurrency(value: string): number {
+  const sanitizedValue = value.replace(/[^\d,.-]/g, "");
+
+  const normalizedValue = sanitizedValue.replace(",", ".");
+
+  return parseFloat(normalizedValue) || 0; 
+}
+
 export default function Page() {
   const router = useRouter();
   const [orders, setOrders] = useState<Order[]>([]);
@@ -74,7 +82,7 @@ export default function Page() {
       try {
         const response = await getOrdersAction();
         if (response.success && Array.isArray(response.orders)) {
-          setOrders(response.orders);
+          setOrders(response.orders); 
         } else {
           console.error("Erro ao carregar ordens:", response.message);
           setOrders([]);
@@ -149,7 +157,7 @@ export default function Page() {
                   <TableCell>{order.client}</TableCell>
                   <TableCell>{order.seller}</TableCell>
                   <TableCell>
-                    {order.totalValue.toLocaleString("pt-BR", {
+                    {normalizeCurrency(order.totalValue).toLocaleString("pt-BR", {
                       style: "currency",
                       currency: "BRL",
                     })}

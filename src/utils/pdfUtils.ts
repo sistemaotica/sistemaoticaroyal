@@ -9,17 +9,6 @@ export function generateExactLayoutPDF(order: Order) {
   const totalWidth = 185;
   const leftX = 10;
 
-function drawCompanyHeader(startY: number) {
-    doc.setFont("helvetica", "bold");
-    doc.text("ÓTICA LAÍS | CNPJ: 00.000.000/0001-00", leftX, startY);
-    startY += 4;
-    doc.setFont("helvetica", "normal");
-    doc.text("Endereço: xxxxxx", leftX, startY);
-    startY += 4;
-    doc.text("Tel.: (81)9.0000-0000  e-mail: xxxxx@xxx.com", leftX, startY);
-    return startY + 5;
- }
-
   function drawYellowHeader(x: number, y: number, w: number, h: number, text: string) {
     doc.setFillColor("#FFFF00");
     doc.setDrawColor("#000000");
