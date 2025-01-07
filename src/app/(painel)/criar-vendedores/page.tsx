@@ -18,6 +18,11 @@ const formatCPF = (value: string): string => {
     .slice(0, 14); // Limita o tamanho máximo do CPF
 };
 
+// Função para remover a formatação do CPF
+const unformatCPF = (value: string): string => {
+  return value.replace(/\D/g, ""); // Remove todos os caracteres não numéricos
+};
+
 // Função para formatar telefone
 const formatPhone = (value: string): string => {
   return value
@@ -75,8 +80,10 @@ export default function Page() {
 
     try {
       const formDataObj = new FormData();
+
+      // Remove a formatação do CPF antes de enviar
       formDataObj.append("name", formData.name);
-      formDataObj.append("cpf", formData.cpf);
+      formDataObj.append("cpf", unformatCPF(formData.cpf)); // CPF sem formatação
       formDataObj.append("phone", formData.phone);
       formDataObj.append("birthDate", formData.birthDate);
       formDataObj.append("email", formData.email);
