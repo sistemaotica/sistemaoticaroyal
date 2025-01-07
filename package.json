@@ -4,10 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
-    "start": "prisma db push && next start && npx prisma db seed",
-    "lint": "next lint",
-    "seed": "node dist/prisma/seed.js"
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -43,6 +42,7 @@
     "@types/pdfmake": "^0.2.11",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "eslint": "^8",
     "eslint-config-next": "14.2.21",
     "postcss": "^8",
     "prisma": "^6.1.0",
