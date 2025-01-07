@@ -1,17 +1,11 @@
-import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
-import "./globals.css";
+import { Sidebar } from "@/components/sidebar";
 import { Toaster } from "@/components/ui/toaster";
-
-export const metadata: Metadata = {
-  title: "Gerador de OS",
-  description: "Sistema para geração de OS de ótica",
-};
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
   weight: ["500", "700", "800"],
-  display: "swap", 
+  display: "swap",
 });
 
 export default function RootLayout({
@@ -22,8 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={dmSans.className}>
       <body className="antialiased">
-        {children}
-        <Toaster/>
+        <Sidebar />
+        <div className="sm:ml-16 sm:mt-3 ml-2 mt-2">
+          {children}
+          <Toaster />
+        </div>
       </body>
     </html>
   );
