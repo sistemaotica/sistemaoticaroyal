@@ -342,53 +342,6 @@ export default function Page() {
 
           {/* Longe OD */}
           <div>
-            <label className="block font-semibold mb-1">Longe OD - Esférico (ESF.)</label>
-            <Input
-              type="text"
-              name="longeOdSpherical"
-              placeholder="Ex.: +0.25"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label className="block font-semibold mb-1">Longe OD - Cilíndrico (CIL.)</label>
-            <Input
-              type="text"
-              name="longeOdCylindrical"
-              placeholder="Ex.: 0.00"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label className="block font-semibold mb-1">Longe OD - Eixo</label>
-            <Input
-              type="text"
-              name="longeOdAxis"
-              placeholder="Ex.: 0"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label className="block font-semibold mb-1">Longe OD - Prisma</label>
-            <Input
-              type="text"
-              name="longeOdPrism"
-              placeholder="Ex.: 0.00"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label className="block font-semibold mb-1">Longe OD - DNP</label>
-            <Input
-              type="text"
-              name="longeOdDnp"
-              placeholder="Ex.: 31.5"
-              onChange={handleInputChange}
-            />
-          </div>
-
-          {/* Longe OE */}
-          <div>
             <label className="block font-semibold mb-1">Longe OE - Esférico (ESF.)</label>
             <Input
               type="text"
@@ -398,11 +351,29 @@ export default function Page() {
             />
           </div>
           <div>
-            <label className="block font-semibold mb-1">Longe OE - Cilíndrico (CIL.)</label>
+            <label className="block font-semibold mb-1">Longe OD - Esférico (ESF.)</label>
+            <Input
+              type="text"
+              name="longeOdSpherical"
+              placeholder="Ex.: 0.00"
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label className="block font-semibold mb-1">Longe OE - Cilíndrico(CIL.)</label>
             <Input
               type="text"
               name="longeOeCylindrical"
-              placeholder="Ex.: -0.25"
+              placeholder="Ex.: 0"
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label className="block font-semibold mb-1">Longe OD - Cilíndrico(CIL.)</label>
+            <Input
+              type="text"
+              name="longeOdCylindrical"
+              placeholder="Ex.: 0.00"
               onChange={handleInputChange}
             />
           </div>
@@ -411,7 +382,18 @@ export default function Page() {
             <Input
               type="text"
               name="longeOeAxis"
-              placeholder="Ex.: 60"
+              placeholder="Ex.: 31.5"
+              onChange={handleInputChange}
+            />
+          </div>
+
+          {/* Longe OE */}
+          <div>
+            <label className="block font-semibold mb-1">Longe OD - Eixo</label>
+            <Input
+              type="text"
+              name="longeOdAxis"
+              placeholder="Ex.: +0.25"
               onChange={handleInputChange}
             />
           </div>
@@ -420,7 +402,16 @@ export default function Page() {
             <Input
               type="text"
               name="longeOePrism"
-              placeholder="Ex.: 0.00"
+              placeholder="Ex.: -0.25"
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label className="block font-semibold mb-1">Longe OD - Prisma</label>
+            <Input
+              type="text"
+              name="longeOdPrism"
+              placeholder="Ex.: 60"
               onChange={handleInputChange}
             />
           </div>
@@ -429,6 +420,15 @@ export default function Page() {
             <Input
               type="text"
               name="longeOeDnp"
+              placeholder="Ex.: 0.00"
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label className="block font-semibold mb-1">Longe OD - DNP</label>
+            <Input
+              type="text"
+              name="longeOdDnp"
               placeholder="Ex.: 32.1"
               onChange={handleInputChange}
             />
@@ -436,11 +436,29 @@ export default function Page() {
 
           {/* Perto OD */}
           <div>
-            <label className="block font-semibold mb-1">Perto OD - Esférico (ESF.)</label>
+            <label className="block font-semibold mb-1">Perto OE - Esférico (ESF.)</label>
+            <Input
+              type="text"
+              name="pertoOeSpherical"
+              placeholder="Ex.: +2.50"
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label className="block font-semibold mb-1">Perto OE - Esférico (ESF.)</label>
             <Input
               type="text"
               name="pertoOdSpherical"
-              placeholder="Ex.: +2.50"
+              placeholder="Ex.: 0.00"
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label className="block font-semibold mb-1">Perto OE - Cilíndrico (CIL.)</label>
+            <Input
+              type="text"
+              name="pertoOeCylindrical"
+              placeholder="Ex.: 0"
               onChange={handleInputChange}
             />
           </div>
@@ -454,11 +472,31 @@ export default function Page() {
             />
           </div>
           <div>
+            <label className="block font-semibold mb-1">Perto OE - Eixo</label>
+            <Input
+              type="text"
+              name="pertoOeAxis"
+              placeholder="Ex.: 31.5"
+              onChange={handleInputChange}
+            />
+          </div>
+
+          {/* Perto OE */}
+          <div>
             <label className="block font-semibold mb-1">Perto OD - Eixo</label>
             <Input
               type="text"
               name="pertoOdAxis"
-              placeholder="Ex.: 0"
+              placeholder="Ex.: +2.50"
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label className="block font-semibold mb-1">Perto OE - Prisma</label>
+            <Input
+              type="text"
+              name="pertoOePrism"
+              placeholder="Ex.: -0.25"
               onChange={handleInputChange}
             />
           </div>
@@ -467,6 +505,15 @@ export default function Page() {
             <Input
               type="text"
               name="pertoOdPrism"
+              placeholder="Ex.: 60"
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label className="block font-semibold mb-1">Perto OE - DNP</label>
+            <Input
+              type="text"
+              name="pertoOeDnp"
               placeholder="Ex.: 0.00"
               onChange={handleInputChange}
             />
@@ -476,53 +523,6 @@ export default function Page() {
             <Input
               type="text"
               name="pertoOdDnp"
-              placeholder="Ex.: 31.5"
-              onChange={handleInputChange}
-            />
-          </div>
-
-          {/* Perto OE */}
-          <div>
-            <label className="block font-semibold mb-1">Perto OE - Esférico (ESF.)</label>
-            <Input
-              type="text"
-              name="pertoOeSpherical"
-              placeholder="Ex.: +2.50"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label className="block font-semibold mb-1">Perto OE - Cilíndrico (CIL.)</label>
-            <Input
-              type="text"
-              name="pertoOeCylindrical"
-              placeholder="Ex.: -0.25"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label className="block font-semibold mb-1">Perto OE - Eixo</label>
-            <Input
-              type="text"
-              name="pertoOeAxis"
-              placeholder="Ex.: 60"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label className="block font-semibold mb-1">Perto OE - Prisma</label>
-            <Input
-              type="text"
-              name="pertoOePrism"
-              placeholder="Ex.: 0.00"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label className="block font-semibold mb-1">Perto OE - DNP</label>
-            <Input
-              type="text"
-              name="pertoOeDnp"
               placeholder="Ex.: 32.1"
               onChange={handleInputChange}
             />

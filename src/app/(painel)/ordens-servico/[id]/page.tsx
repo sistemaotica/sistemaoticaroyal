@@ -74,8 +74,13 @@ export default function OrderDetails({ params }: { params: { id: string } }) {
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+
 
   useEffect(() => {
+    const userRole = localStorage.getItem("userRole"); 
+    setIsAdmin(userRole === "ADMIN");
+
     async function fetchOrder() {
       try {
         const response = await getOrderByIdAction(Number(params.id));
@@ -138,8 +143,6 @@ export default function OrderDetails({ params }: { params: { id: string } }) {
   return (
     <main className="flex flex-col mx-4 my-6 sm:px-7 sm:w-full sm:-ml-2">
       <h1 className="text-2xl font-semibold mb-6">Ordem de Serviço: {order.orderNumber}</h1>
-
-      {/* Informações Gerais */}
       <section className="mb-6 rounded-2xl border items-center">
         <Table>
           <TableHeader>
@@ -181,7 +184,6 @@ export default function OrderDetails({ params }: { params: { id: string } }) {
         </Table>
       </section>
 
-      {/* Cliente */}
       <section className="mb-6 border rounded-2xl items-center">
         <Table>
           <TableHeader>
@@ -211,7 +213,6 @@ export default function OrderDetails({ params }: { params: { id: string } }) {
         </Table>
       </section>
 
-      {/* Vendedor */}
       <section className="mb-6 border rounded-2xl items-center">
         <Table>
           <TableHeader>
@@ -364,6 +365,7 @@ export default function OrderDetails({ params }: { params: { id: string } }) {
         >
           Voltar
         </Button>
+      {isAdmin && (
         <Button
           className="w-full sm:w-auto"
           variant="destructive"
@@ -371,6 +373,7 @@ export default function OrderDetails({ params }: { params: { id: string } }) {
         >
           Excluir
         </Button>
+      )}
       </div>
 
       {openDialog && (

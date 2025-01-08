@@ -248,3 +248,73 @@ export async function deleteOrderService(orderId: number) {
     };
   }
 }
+
+  export async function updateOrderService(orderId: number, data: CreateOrderInput) {
+    const {
+      clientId,
+      sellerId,
+      examiner,
+      date,
+      totalValue,
+      amountPaid,
+      amountDue,
+      deliveryDate,
+      observations,
+      lensDetails,
+    } = data;
+  
+    const transformedLensDetails = {
+      longeOdSpherical: lensDetails.longeOdSpherical || null,
+      longeOdCylindrical: lensDetails.longeOdCylindrical || null,
+      longeOdAxis: lensDetails.longeOdAxis || null,
+      longeOdPrism: lensDetails.longeOdPrism || null,
+      longeOdDnp: lensDetails.longeOdDnp || null,
+      longeOeSpherical: lensDetails.longeOeSpherical || null,
+      longeOeCylindrical: lensDetails.longeOeCylindrical || null,
+      longeOeAxis: lensDetails.longeOeAxis || null,
+      longeOePrism: lensDetails.longeOePrism || null,
+      longeOeDnp: lensDetails.longeOeDnp || null,
+      pertoOdSpherical: lensDetails.pertoOdSpherical || null,
+      pertoOdCylindrical: lensDetails.pertoOdCylindrical || null,
+      pertoOdAxis: lensDetails.pertoOdAxis || null,
+      pertoOdPrism: lensDetails.pertoOdPrism || null,
+      pertoOdDnp: lensDetails.pertoOdDnp || null,
+      pertoOeSpherical: lensDetails.pertoOeSpherical || null,
+      pertoOeCylindrical: lensDetails.pertoOeCylindrical || null,
+      pertoOeAxis: lensDetails.pertoOeAxis || null,
+      pertoOePrism: lensDetails.pertoOePrism || null,
+      pertoOeDnp: lensDetails.pertoOeDnp || null,
+      addition: lensDetails.addition || null,
+      dp: lensDetails.dp || null,
+      height: lensDetails.height || null,
+      frameDescription: lensDetails.frameDescription || null,
+      frameColor: lensDetails.frameColor || null,
+      lensType: lensDetails.lensType || null,
+      lensCategory: lensDetails.lensCategory || null,
+    };
+  
+    const updatedOrder = await prisma.order.update({
+      where: { id: orderId },
+      data: {
+        clientId: parseInt(clientId, 10),
+        sellerId: parseInt(sellerId, 10),
+        examiner,
+        date: new Date(date),
+        totalValue,
+        amountPaid,
+        amountDue,
+        deliveryDate: new Date(deliveryDate),
+        observations,
+        lensDetails: {
+          update: transformedLensDetails,
+        },
+      },
+      include: {
+        client: true,
+        seller: true,
+        lensDetails: true,
+      },
+    });
+  
+    return updatedOrder;
+  }

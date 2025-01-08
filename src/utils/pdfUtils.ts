@@ -53,14 +53,21 @@ export function generateExactLayoutPDF(order: Order) {
       doc.line(xPos, startY, xPos, startY + height);
     }
     const line1Y = startY + 3;
+
+    const centerText = (text: string, colStart: number, colEnd: number, y: number) => {
+      const textWidth = doc.getTextWidth(text);
+      const centerX = colStart + (colEnd - colStart - textWidth) / 2;
+      doc.text(text, centerX, y);
+    };
+
     doc.setFont("helvetica", "bold");
     doc.text("CLIENTE", leftX + 2, line1Y);
     doc.setFont("helvetica", "normal");
-    doc.text(order.client || "", leftX + 58, line1Y);
+    doc.text(order.client || "", leftX + 50, line1Y);
     doc.setFont("helvetica", "bold");
     doc.text("EXAMINADOR", leftX + colW * 2 + 2, line1Y);
     doc.setFont("helvetica", "normal");
-    doc.text(order.examiner || "", leftX + colW * 2 + 76, line1Y);
+    doc.text(order.examiner || "", leftX + colW * 2 + 58, line1Y);
     if (lines >= 2) {
       const line2Y = startY + rowHeight + 3;
       doc.setFont("helvetica", "bold");
@@ -70,29 +77,29 @@ export function generateExactLayoutPDF(order: Order) {
       doc.setFont("helvetica", "bold");
       doc.text("TELEFONE", leftX + colW * 2 + 2, line2Y);
       doc.setFont("helvetica", "normal");
-      doc.text(order.clientPhone || "", leftX + colW * 4 - 2, line2Y, { align: "right" });
+      doc.text(order.clientPhone || "", leftX + colW * 2 + 58, line2Y);
     }
     if (lines >= 3) {
       const line3Y = startY + rowHeight * 2 + 3;
       doc.setFont("helvetica", "bold");
       doc.text("DATA DA VENDA", leftX + 2, line3Y);
       doc.setFont("helvetica", "normal");
-      doc.text(order.date || "", leftX + 58, line3Y);
+      doc.text(order.date || "", leftX + 50, line3Y);
       doc.setFont("helvetica", "bold");
       doc.text("DATA DE NASC.", leftX + colW * 2 + 2, line3Y);
       doc.setFont("helvetica", "normal");
-      doc.text(order.clientBirthDate || "", leftX + colW * 4 - 2, line3Y, { align: "right" });
+      doc.text(order.clientBirthDate || "", leftX + colW * 2 + 58, line3Y);
     }
     if (lines >= 4) {
       const line4Y = startY + rowHeight * 3 + 3;
       doc.setFont("helvetica", "bold");
       doc.text("ENTREGA PREVISTA", leftX + 2, line4Y);
       doc.setFont("helvetica", "normal");
-      doc.text(order.deliveryDate || "", leftX + 58, line4Y);
+      doc.text(order.deliveryDate || "", leftX + 50, line4Y);
       doc.setFont("helvetica", "bold");
       doc.text("VALOR DA VENDA", leftX + colW * 2 + 2, line4Y);
       doc.setFont("helvetica", "normal");
-      doc.text(`${order.totalValue || "0,00"}`, leftX + colW * 4 - 2, line4Y, { align: "right" });
+      doc.text(`${order.totalValue || "0,00"}`, leftX + colW * 2 + 58, line4Y);
     }
     if (lines >= 5) {
       const line5Y = startY + rowHeight * 4 + 3;
@@ -103,18 +110,18 @@ export function generateExactLayoutPDF(order: Order) {
       doc.setFont("helvetica", "bold");
       doc.text("VALOR PAGO", leftX + colW * 2 + 2, line5Y);
       doc.setFont("helvetica", "normal");
-      doc.text(`${order.amountPaid || "0,00"}`, leftX + colW * 4 - 2, line5Y, { align: "right" });
+      doc.text(`${order.amountPaid || "0,00"}`, leftX + colW * 2 + 58, line5Y);
     }
     if (lines >= 6) {
       const line6Y = startY + rowHeight * 5 + 3;
       doc.setFont("helvetica", "bold");
       doc.text("OBSERVAÇÃO", leftX + 2, line6Y);
       doc.setFont("helvetica", "normal");
-      doc.text(order.observations || "", leftX + 58, line6Y);
+      doc.text(order.observations || "", leftX + 50, line6Y);
       doc.setFont("helvetica", "bold");
       doc.text("VENDEDOR", leftX + colW * 2 + 2, line6Y);
       doc.setFont("helvetica", "normal");
-      doc.text(order.seller || "", leftX + colW * 2 + 80, line6Y);
+      doc.text(order.seller || "", leftX + colW * 2 + 58, line6Y);
     }
     return startY + height;
   }
