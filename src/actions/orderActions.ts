@@ -7,14 +7,14 @@ import {
   getOrdersService,
   getOrderByIdService,
   deleteOrderService,
-  getNextOrderNumber,
-  updateOrderService,
+  getNextOrderNumber
 } from "@/services/orderService";
 
-// Função para criar ordem
 export async function createOrderAction(formData: FormData) {
   try {
+    // Obter o próximo número da ordem
     const nextOrderNumber = await getNextOrderNumber();
+
     const data = Object.fromEntries(formData.entries());
 
     const lensDetails = Object.fromEntries(
@@ -27,7 +27,7 @@ export async function createOrderAction(formData: FormData) {
 
     const validatedData = createOrderSchema.parse({
       ...data,
-      orderNumber: nextOrderNumber,
+      orderNumber: nextOrderNumber, 
       lensDetails,
     });
 
@@ -47,41 +47,6 @@ export async function createOrderAction(formData: FormData) {
   }
 }
 
-// Função para editar ordem
-export async function updateOrderAction(orderId: number, formData: FormData) {
-  try {
-    const data = Object.fromEntries(formData.entries());
-
-    const lensDetails = Object.fromEntries(
-      Object.entries(data).filter(([key]) =>
-        key.startsWith("longe") ||
-        key.startsWith("perto") ||
-        ["addition", "dp", "height", "frameDescription", "frameColor", "lensType", "lensCategory"].includes(key)
-      )
-    );
-
-    const validatedData = createOrderSchema.parse({
-      ...data,
-      lensDetails,
-    });
-
-    const updatedOrder = await updateOrderService(orderId, validatedData);
-
-    return {
-      success: true,
-      order: updatedOrder,
-    };
-  } catch (error) {
-    console.error("Erro ao editar ordem:", error);
-
-    return {
-      success: false,
-      message: error instanceof z.ZodError ? error.errors : "Erro inesperado",
-    };
-  }
-}
-
-// Função para buscar todas as ordens
 export async function getOrdersAction() {
   try {
     const orders = await getOrdersService();
@@ -98,7 +63,6 @@ export async function getOrdersAction() {
   }
 }
 
-// Função para buscar ordem pelo ID
 export async function getOrderByIdAction(orderId: number) {
   try {
     const order = await getOrderByIdService(orderId);
@@ -123,7 +87,16 @@ export async function getOrderByIdAction(orderId: number) {
   }
 }
 
-// Função para excluir ordem
+export async function getNextOrderNumberAction() {
+  try {
+    const nextNumber = await getNextOrderNumber();
+    return nextNumber;
+  } catch (error) {
+    console.error("Erro ao buscar o próximo número de OS:", error);
+    throw new Error("Erro ao buscar o próximo número de OS");
+  }
+}
+
 export async function deleteOrderAction(orderId: number) {
   try {
     const result = await deleteOrderService(orderId);
