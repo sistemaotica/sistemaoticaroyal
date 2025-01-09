@@ -142,7 +142,7 @@ export function generateExactLayoutPDF(order: Order) {
       doc.line(leftX + colW * c, startY, leftX + colW * c, startY + height);
     }
     doc.setFont("helvetica", "bold");
-    doc.text("OD/OE", leftX + 2, startY + 3);
+    doc.text("", leftX + 2, startY + 3);
     doc.text("ESF.", leftX + colW + 2, startY + 3);
     doc.text("CIL.", leftX + colW * 2 + 2, startY + 3);
     doc.text("EIXO", leftX + colW * 3 + 2, startY + 3);

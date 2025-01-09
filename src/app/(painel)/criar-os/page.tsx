@@ -38,6 +38,15 @@ function validateAndConvertDate(date: string): string {
   return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 }
 
+function formatCurrency(value: string): string {
+  const numericValue = parseFloat(value.replace(/[^\d]/g, "")) / 100; // Remove caracteres não numéricos
+  if (isNaN(numericValue)) return "R$ 0,00";
+  return numericValue.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+}
+
 export default function Page() {
   const [osNumber, setOsNumber] = useState("");
   const [clients, setClients] = useState<Client[]>([]);
@@ -48,9 +57,9 @@ export default function Page() {
   const [formData, setFormData] = useState({
     examiner: "",
     date: "",
-    totalValue: "",
-    amountPaid: "",
-    amountDue: "",
+    totalValue: "R$ 0,00", // Formato inicial
+    amountPaid: "R$ 0,00", // Formato inicial
+    amountDue: "R$ 0,00", // Calculado automaticamente
     deliveryDate: "",
     longeOdSpherical: "",
     longeOdCylindrical: "",
@@ -85,11 +94,9 @@ export default function Page() {
   useEffect(() => {
     async function fetchData() {
       try {
-        // Obter o número da OS sequencial usando Server Actions
         const nextOrderNumber = await getNextOrderNumberAction();
         setOsNumber(nextOrderNumber);
 
-        // Buscar clientes e vendedores
         const [fetchedClients, fetchedSellers] = await Promise.all([
           getClientsAction(),
           getSellersAction(),
@@ -108,23 +115,34 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
-    const totalValue = parseFloat(formData.totalValue.replace(/[^\d.,]/g, "").replace(",", ".") || "0");
-    const amountPaid = parseFloat(formData.amountPaid.replace(/[^\d.,]/g, "").replace(",", ".") || "0");
+    const totalValue = parseFloat(formData.totalValue.replace(/[^\d]/g, "")) / 100;
+    const amountPaid = parseFloat(formData.amountPaid.replace(/[^\d]/g, "")) / 100;
 
     if (!isNaN(totalValue) && !isNaN(amountPaid)) {
       const amountDue = totalValue - amountPaid;
       setFormData((prev) => ({
         ...prev,
-        amountDue: new Intl.NumberFormat("pt-BR", {
+        amountDue: amountDue.toLocaleString("pt-BR", {
           style: "currency",
           currency: "BRL",
-        }).format(amountDue),
+        }),
       }));
     }
   }, [formData.totalValue, formData.amountPaid]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+
+    // Formatação específica para os campos de valor
+    if (name === "totalValue" || name === "amountPaid") {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: formatCurrency(value),
+      }));
+      return;
+    }
+
+    // Atualização normal para outros campos
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -152,10 +170,19 @@ export default function Page() {
       formDataObj.append("clientId", selectedClient);
       formDataObj.append("sellerId", selectedSeller);
       formDataObj.append("examiner", formData.examiner);
+      formDataObj.append(
+        "totalValue",
+        formData.totalValue.replace(/[^\d.,]/g, "").replace(",", ".")
+      );
+      formDataObj.append(
+        "amountPaid",
+        formData.amountPaid.replace(/[^\d.,]/g, "").replace(",", ".")
+      );
+      formDataObj.append(
+        "amountDue",
+        formData.amountDue.replace(/[^\d.,]/g, "").replace(",", ".")
+      );
       formDataObj.append("date", isoDate);
-      formDataObj.append("totalValue", formData.totalValue.replace(/[^\d.,]/g, "").replace(",", "."));
-      formDataObj.append("amountPaid", formData.amountPaid.replace(/[^\d.,]/g, "").replace(",", "."));
-      formDataObj.append("amountDue", formData.amountDue.replace(/[^\d.,]/g, "").replace(",", "."));
       formDataObj.append("deliveryDate", isoDeliveryDate);
 
       const lensDetailsKeys = [
