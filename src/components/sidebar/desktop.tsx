@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { FileText, PlusSquare, UserCheck, Users } from "lucide-react";
+import { FileText, LogOut, PlusSquare, UserCheck, Users } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -25,7 +25,7 @@ export function Desktop() {
                         href="#"
                     >
                         <Avatar>
-                            <AvatarImage src="https://github.com/sistemas-blockcode.png" alt="@shadcn" />
+                            <AvatarImage src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="@shadcn" />
                             <AvatarFallback>BC</AvatarFallback>
                         </Avatar>
                         <span className="sr-only">Dashboard Avatar</span>
@@ -82,6 +82,23 @@ export function Desktop() {
                             </Link>
                         </TooltipTrigger>
                         <TooltipContent side="right">Nova OS</TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
+            </nav>
+
+            <nav className="mt-auto flex flex-col items-center gap-4 px-2 py-5">
+                <TooltipProvider>
+                    <Tooltip>
+                         <TooltipTrigger asChild>
+                            <Link
+                                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-colors hover:text-primary"
+                                href="/login"
+                            >
+                                <LogOut size={17} />
+                                <span className="sr-only">Sair</span>
+                            </Link>
+                        </TooltipTrigger>
+                        <TooltipContent side="right">Sair</TooltipContent>
                     </Tooltip>
                 </TooltipProvider>
             </nav>

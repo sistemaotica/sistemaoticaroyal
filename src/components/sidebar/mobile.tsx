@@ -10,6 +10,7 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import {
     FileText,
+    LogOut,
     Menu,
     PlusSquare,
     UserCheck,
@@ -49,7 +50,7 @@ export function Mobile() {
                             >
                                 <Avatar>
                                     <AvatarImage
-                                        src="https://github.com/sistemas-blockcode.png"
+                                        src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
                                         alt="@shadcn"
                                     />
                                     <AvatarFallback>BC</AvatarFallback>
@@ -93,6 +94,16 @@ export function Mobile() {
                             >
                                 <PlusSquare size={17} />
                                 Nova OS
+                            </Link>
+                        </nav>
+                        <nav className="mt-auto items-center gap-4 px-2 py-5">
+                        <Link
+                                href="/login"
+                                className="flex items-center text-[15px] gap-3 px-[2.5px]
+                                hover:text-primary"
+                            >
+                                <LogOut size={17} />
+                                Sair
                             </Link>
                         </nav>
                     </SheetContent>
