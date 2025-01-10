@@ -243,7 +243,7 @@ export default function Page() {
 
   return (
     <main className="flex flex-col mx-4 my-6 sm:px-7 sm:w-full sm:-ml-2">
-      <h1 className="text-xl font-semibold mb-4">Criar/Edição de Ordem de Serviço</h1>
+      <h1 className="text-xl font-semibold mb-4">Criar de Ordem de Serviço</h1>
       <form onSubmit={handleSave} className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
         {/* Número da OS */}
         <div className="sm:col-span-2">
