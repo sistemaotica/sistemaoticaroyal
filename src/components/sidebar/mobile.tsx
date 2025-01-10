@@ -96,16 +96,6 @@ export function Mobile() {
                                 Nova OS
                             </Link>
                         </nav>
-                        <nav className="mt-auto items-center gap-4 px-2 py-5">
-                        <Link
-                                href="/login"
-                                className="flex items-center text-[15px] gap-3 px-[2.5px]
-                                hover:text-primary"
-                            >
-                                <LogOut size={17} />
-                                Sair
-                            </Link>
-                        </nav>
                     </SheetContent>
                 </Sheet>
                 <h2>Menu</h2>

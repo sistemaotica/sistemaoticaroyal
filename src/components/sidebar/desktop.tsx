@@ -85,23 +85,6 @@ export function Desktop() {
                     </Tooltip>
                 </TooltipProvider>
             </nav>
-
-            <nav className="mt-auto flex flex-col items-center gap-4 px-2 py-5">
-                <TooltipProvider>
-                    <Tooltip>
-                         <TooltipTrigger asChild>
-                            <Link
-                                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-colors hover:text-primary"
-                                href="/login"
-                            >
-                                <LogOut size={17} />
-                                <span className="sr-only">Sair</span>
-                            </Link>
-                        </TooltipTrigger>
-                        <TooltipContent side="right">Sair</TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
-            </nav>
         </aside>
     );
 }
