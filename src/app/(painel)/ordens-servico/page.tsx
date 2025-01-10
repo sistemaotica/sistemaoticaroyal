@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -63,12 +63,14 @@ interface Order {
   lensDetails: LensDetails;
 }
 
-function normalizeCurrency(value: string): number {
+function parseCurrency(value: string | number): number {
+  if (typeof value === "number") {
+    return value;
+  }
+
   const sanitizedValue = value.replace(/[^\d,.-]/g, "");
-
-  const normalizedValue = sanitizedValue.replace(",", ".");
-
-  return parseFloat(normalizedValue) || 0; 
+  const normalizedValue = sanitizedValue.replace(/\./g, "").replace(",", ".");
+  return parseFloat(normalizedValue) || 0;
 }
 
 export default function Page() {
@@ -82,7 +84,7 @@ export default function Page() {
       try {
         const response = await getOrdersAction();
         if (response.success && Array.isArray(response.orders)) {
-          setOrders(response.orders); 
+          setOrders(response.orders);
         } else {
           console.error("Erro ao carregar ordens:", response.message);
           setOrders([]);
@@ -105,11 +107,16 @@ export default function Page() {
     router.push(`/ordens-servico/${orderId}`);
   };
 
-  const filteredOrders = orders.filter((order) =>
-    order.orderNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    order.client.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    order.seller.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredOrders = orders.filter((order) => {
+    const searchLower = searchTerm.toLowerCase();
+
+    return (
+      order.orderNumber.toLowerCase().includes(searchLower) ||
+      order.client.toLowerCase().includes(searchLower) ||
+      order.seller.toLowerCase().includes(searchLower) ||
+      order.date.toLowerCase().includes(searchLower)
+    );
+  });
 
   return (
     <main className="flex flex-col mx-3 my-2 w-450px sm:w-full sm:px-3 sm:my-1 sm:-ml-1">
@@ -157,7 +164,7 @@ export default function Page() {
                   <TableCell>{order.client}</TableCell>
                   <TableCell>{order.seller}</TableCell>
                   <TableCell>
-                    {normalizeCurrency(order.totalValue).toLocaleString("pt-BR", {
+                    {parseCurrency(order.totalValue).toLocaleString("pt-BR", {
                       style: "currency",
                       currency: "BRL",
                     })}

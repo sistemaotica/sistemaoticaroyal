@@ -6,15 +6,14 @@ import {
   createOrderService,
   getOrdersService,
   getOrderByIdService,
+  updateOrderService,
   deleteOrderService,
-  getNextOrderNumber
+  getNextOrderNumber,
 } from "@/services/orderService";
 
 export async function createOrderAction(formData: FormData) {
   try {
-    // Obter o próximo número da ordem
     const nextOrderNumber = await getNextOrderNumber();
-
     const data = Object.fromEntries(formData.entries());
 
     const lensDetails = Object.fromEntries(
@@ -27,7 +26,7 @@ export async function createOrderAction(formData: FormData) {
 
     const validatedData = createOrderSchema.parse({
       ...data,
-      orderNumber: nextOrderNumber, 
+      orderNumber: nextOrderNumber,
       lensDetails,
     });
 
@@ -39,6 +38,39 @@ export async function createOrderAction(formData: FormData) {
     };
   } catch (error) {
     console.error("Erro ao criar ordem:", error);
+
+    return {
+      success: false,
+      message: error instanceof z.ZodError ? error.errors : "Erro inesperado",
+    };
+  }
+}
+
+export async function updateOrderAction(orderId: number, formData: FormData) {
+  try {
+    const data = Object.fromEntries(formData.entries());
+
+    const lensDetails = Object.fromEntries(
+      Object.entries(data).filter(([key]) =>
+        key.startsWith("longe") ||
+        key.startsWith("perto") ||
+        ["addition", "dp", "height", "frameDescription", "frameColor", "lensType", "lensCategory"].includes(key)
+      )
+    );
+
+    const validatedData = createOrderSchema.parse({
+      ...data,
+      lensDetails,
+    });
+
+    const updatedOrder = await updateOrderService(orderId, validatedData);
+
+    return {
+      success: true,
+      order: updatedOrder,
+    };
+  } catch (error) {
+    console.error("Erro ao atualizar ordem:", error);
 
     return {
       success: false,
