@@ -133,7 +133,7 @@ export default function Page() {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        {isAdmin && <Button onClick={handlePush}>Adicionar Cliente</Button>}
+        <Button onClick={handlePush}>Adicionar Cliente</Button>
       </div>
       <div className="border rounded-2xl items-center">
         <Table>
