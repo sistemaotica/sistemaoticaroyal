@@ -73,7 +73,7 @@ export function generateExactLayoutPDF(order: Order) {
       doc.setFont("helvetica", "bold");
       doc.text("ENDEREÇO", leftX + 2, line2Y);
       doc.setFont("helvetica", "normal");
-      doc.text(order.clientAddress || "", leftX + 50, line2Y);
+      doc.text(order.clientAddress || "", leftX + 35, line2Y);
       doc.setFont("helvetica", "bold");
       doc.text("TELEFONE", leftX + colW * 2 + 2, line2Y);
       doc.setFont("helvetica", "normal");
