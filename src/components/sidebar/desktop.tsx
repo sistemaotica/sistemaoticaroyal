@@ -28,7 +28,7 @@ export function Desktop() {
                             <AvatarImage src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="@shadcn" />
                             <AvatarFallback>BC</AvatarFallback>
                         </Avatar>
-                        <span className="sr-only">Dashboard Avatar</span>
+                        <span className="sr-only">Dashboard Avatars</span>
                     </Link>
                     <Tooltip>
                         <TooltipTrigger asChild>
