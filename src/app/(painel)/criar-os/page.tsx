@@ -472,7 +472,7 @@ export default function Page() {
             />
           </div>
           <div>
-            <label className="block font-semibold mb-1">Perto OE - Esférico (ESF.)</label>
+            <label className="block font-semibold mb-1">Perto OD - Esférico (ESF.)</label>
             <Input
               type="text"
               name="pertoOdSpherical"
